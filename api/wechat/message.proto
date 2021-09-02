@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package api.wechat;
+
+import "google/api/annotations.proto";
+
+option go_package = "wechat-center/api/wechat;wechat";
+option java_multiple_files = true;
+option java_package = "api.wechat";
+
+service Message {
+	rpc ReplyMessage (ReplyMessageRequest) returns (ReplyMessageReply) {
+		option (google.api.http) = {
+                // 定义一个 GET 接口，并且把 name 映射到 HelloRequest
+                get: "/wechat/message/reply",
+        };
+	};
+	rpc Auth (AuthRequest) returns (AuthReply) {
+    		option (google.api.http) = {
+                    // 定义一个 GET 接口，并且把 name 映射到 HelloRequest
+                    get: "/wechat/auth",
+            };
+    }
+}
+
+message ReplyMessageRequest {
+  string msg = 1;
+}
+message ReplyMessageReply {
+  string reply_msg = 1;
+}
+
+message AuthRequest {
+   string signature = 1;
+   string timestamp = 2;
+   string nonce = 3;
+   string echostr = 4;
+}
+
+message AuthReply {
+   string echostr = 4;
+}
