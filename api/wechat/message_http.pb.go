@@ -6,6 +6,7 @@ package wechat
 
 import (
 	context "context"
+	"fmt"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 )
@@ -62,7 +63,8 @@ func _Message_Auth0_HTTP_Handler(srv MessageHTTPServer) func(ctx http.Context) e
 			return err
 		}
 		reply := out.(*AuthReply)
-		return ctx.Result(200, reply)
+		fmt.Println(reply)
+		return ctx.Result(200, in.Echostr)
 	}
 }
 
