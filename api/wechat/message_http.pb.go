@@ -9,6 +9,7 @@ import (
 	"fmt"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	"strconv"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -64,7 +65,8 @@ func _Message_Auth0_HTTP_Handler(srv MessageHTTPServer) func(ctx http.Context) e
 		}
 		reply := out.(*AuthReply)
 		fmt.Println(reply)
-		return ctx.Result(200, in.Echostr)
+		data,_ :=strconv.Atoi(in.Echostr)
+		return ctx.Result(200, data)
 	}
 }
 
